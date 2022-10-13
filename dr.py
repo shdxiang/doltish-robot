@@ -21,16 +21,23 @@ with open(args.config) as f:
 
 interval = config['interval']
 cmd_line = config['cmd_line']
+vk_packet = config.get('vk_packet', True)
 
 # start and connect application
 Application().start(cmd_line, work_dir=config.get('work_dir'))
 time.sleep(interval)
 app = Application().connect(path=cmd_line)
+time.sleep(interval)
 
 # actions
 for action in config['actions']:
     if action['type'] == 'key':
-        keyboard.send_keys(action['value'], with_spaces=True,
-                           with_tabs=True, with_newlines=True)
-    elif action['type'] == 'focus':
+        keyboard.send_keys(
+            action['value'], with_spaces=True, vk_packet=vk_packet)
+    elif action['type'] == 'input':
+        value = action['value']
+        value = input(f'{value}:')
+        keyboard.send_keys(value, with_spaces=True, vk_packet=vk_packet)
         app.top_window().set_focus()
+
+    time.sleep(interval)
