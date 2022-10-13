@@ -1,0 +1,22 @@
+{
+    "cmd_line": "notepad.exe",
+    "interval": 0.5,
+    "actions": [
+        {
+            "type": "key",
+            "value": "Hello world!"
+        },
+        {
+            "type": "key",
+            "value": "^s"
+        },
+        {
+            "type": "key",
+            "value": "hello_world.txt"
+        },
+        {
+            "type": "key",
+            "value": "%s"
+        }
+    ]
+}
