@@ -26,7 +26,7 @@ vk_packet = config.get('vk_packet', True)
 
 # close if already running
 try:
-    app = Application().connect(path=cmd_line, timeout=2)
+    app = Application().connect(path=cmd_line, timeout=1)
     app.kill()
 except Exception as e:
     pass
