@@ -7,8 +7,7 @@ from pywinauto.application import Application
 from pywinauto import keyboard
 
 
-parser = argparse.ArgumentParser(
-    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 parser.add_argument('-c', '--config', help='config file',
                     type=str, required=True)
@@ -49,8 +48,9 @@ for action in config['actions']:
     act_value = action.get('value')
 
     if act_type == 'key':
-        keyboard.send_keys(
-            action['value'], with_spaces=True, vk_packet=vk_packet)
+        for i in range(action.get('count', 1)):
+            keyboard.send_keys(act_value, with_spaces=True, vk_packet=vk_packet)
+            time.sleep(interval)
     elif act_type == 'input':
         value = input(f'{act_value}:')
         app.top_window().set_focus()
